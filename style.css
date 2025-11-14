@@ -1,0 +1,170 @@
+   body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #C8A2C8; /* Lilac */
+      color: #333;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Main heading */
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      color: #4B0082;
+      margin-top: 20px;
+      text-shadow: 2px 2px #f4e3ff;
+      animation: slideDown 1s ease-out;
+    }
+
+    /* Slide animation */
+    @keyframes slideDown {
+      from { transform: translateY(-40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Subheading under name */
+    .subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #4A4A4A;
+    }
+
+    /* Section titles */
+    h2 {
+      text-align: center;
+      color: #6A0DAD;
+      font-size: 2rem;
+      margin-top: 40px;
+      text-shadow: 1px 1px #f5dcff;
+      animation: fadeUp 1s ease-out;
+    }
+
+    /* Fade-up animation */
+    @keyframes fadeUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* About paragraph */
+    .about {
+      text-align: center;
+      font-size: 1.2rem;
+      width: 60%;
+      margin: auto;
+      color: #4A4A4A;
+    }
+
+    /* Image styling */
+    img {
+      display: block;
+      margin: 20px auto;
+      width: 200px;
+      border-radius: 10px;
+      border: 3px solid white;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    }
+
+    /* Projects list */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 1.2rem;
+      background: white;
+      margin: 10px auto;
+      width: 40%;
+      padding: 10px;
+      border-radius: 10px;
+      color: #4B0082;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeUp 1.2s ease-out;
+    }
+
+    /* Skills table */
+    table {
+      margin: 20px auto;
+      width: 50%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    table th {
+      background: #6A0DAD;
+      color: white;
+      padding: 10px;
+      font-size: 1.1rem;
+    }
+
+    table td {
+      padding: 10px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #4B0082;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #F3E8FF;
+    }
+
+    /* Contact form */
+    form {
+      background: white;
+      padding: 20px;
+      width: 40%;
+      margin: 30px auto;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    }
+
+    input, textarea {
+      width: 80%;
+      padding: 10px;
+      border: 2px solid #C3A1E1;
+      border-radius: 8px;
+      outline: none;
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #6A0DAD;
+      box-shadow: 0 0 10px rgba(106, 13, 173, 0.3);
+    }
+
+    /* Send button */
+    button {
+      padding: 10px 20px;
+      background-color: #6A0DAD;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 1rem;
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 5px #6A0DAD; }
+      to { box-shadow: 0 0 20px #6A0DAD; }
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
