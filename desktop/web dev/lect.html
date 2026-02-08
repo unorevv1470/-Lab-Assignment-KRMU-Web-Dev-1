@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Event Dashboard</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6fd6d6, #5aa9e6);
+  }
+
+  h1 {
+    text-align: center;
+    color: white;
+    padding: 15px 0;
+  }
+
+  .main {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    flex: 1;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 6px;
+  }
+
+  button {
+    width: 100%;
+    padding: 8px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  button:hover {
+    background: #2563eb;
+  }
+
+  .event {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .event h4 {
+    margin: 0;
+  }
+
+  .event small {
+    color: gray;
+  }
+
+  .bottom {
+    margin: 20px;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>🎯 Smart Event Dashboard</h1>
+
+<div class="main">
+
+  <!-- Add New Event -->
+  <div class="card">
+    <h3>Add New Event</h3>
+
+    <input type="text" id="title" placeholder="Event Title">
+    <input type="date" id="date">
+    <select id="category">
+      <option>Conference</option>
+      <option>Workshop</option>
+      <option>Seminar</option>
+    </select>
+    <textarea id="desc" placeholder="Description"></textarea>
+
+    <button id="addBtn">Add Event</button>
+  </div>
+
+  <!-- My Events -->
+  <div class="card">
+    <h3>My Events</h3>
+    <div id="eventList"></div>
+  </div>
+
+</div>
+
+<!-- DOM Demo -->
+<div class="card bottom">
+  <h3>DOM Manipulation Demo</h3>
+  <input type="text" id="keyInput" placeholder="Press any key">
+  <p id="output">You Pressed: </p>
+</div>
+
+<script>
+  const addBtn = document.getElementById("addBtn");
+  const eventList = document.getElementById("eventList");
+
+  function addEvent() {
+    const title = document.getElementById("title").value;
+    const date = document.getElementById("date").value;
+    const category = document.getElementById("category").value;
+    const desc = document.getElementById("desc").value;
+
+    if (title === "") {
+      alert("Enter event title");
+      return;
+    }
+
+    const div = document.createElement("div");
+    div.className = "event";
+
+    div.innerHTML = `
+      <h4>${title}</h4>
+      <small>${date} • ${category}</small>
+      <p>${desc}</p>
+    `;
+
+    eventList.appendChild(div);
+
+    document.getElementById("title").value = "";
+    document.getElementById("desc").value = "";
+  }
+
+  addBtn.addEventListener("click", addEvent);
+
+  // DOM Key Demo
+  document.getElementById("keyInput").addEventListener("keydown", function(e) {
+    document.getElementById("output").innerText = "You Pressed: " + e.key;
+  });
+</script>
+
+</body>
+</html>
