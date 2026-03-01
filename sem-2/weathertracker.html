@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Async Weather Tracker</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#ffb6c1;
+}
+
+/* HEADER */
+
+.header{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+color:white;
+padding:20px;
+}
+
+/* CONTAINER */
+
+.container{
+width:90%;
+max-width:1100px;
+margin:auto;
+}
+
+/* ROW */
+
+.row{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+/* CARD */
+
+.card{
+background:#fff0f5;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+flex:1;
+min-width:300px;
+}
+
+/* SEARCH */
+
+input{
+width:70%;
+padding:10px;
+border-radius:6px;
+border:1px solid #ddd;
+}
+
+button{
+padding:10px 15px;
+border:none;
+border-radius:6px;
+background:#ff69b4;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff1493;
+}
+
+/* HISTORY */
+
+.history{
+margin-top:15px;
+}
+
+.history button{
+margin-right:10px;
+margin-top:5px;
+padding:6px 10px;
+}
+
+/* WEATHER TABLE */
+
+table{
+width:100%;
+margin-top:10px;
+}
+
+td{
+padding:8px;
+border-bottom:1px solid #f3b6c6;
+}
+
+td:last-child{
+text-align:right;
+}
+
+/* CONSOLE */
+
+.console{
+margin-top:20px;
+}
+
+.console-box{
+background:#ffc0cb;
+padding:15px;
+border-radius:10px;
+font-family:monospace;
+color:#4a0033;
+height:150px;
+overflow:auto;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.row{
+flex-direction:column;
+}
+
+input{
+width:100%;
+margin-bottom:10px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">🌤 Async Weather Tracker</div>
+
+<div class="container">
+
+<div class="row">
+
+<!-- SEARCH BOX -->
+
+<div class="card">
+
+<h3>Search City</h3>
+
+<br>
+
+<input type="text" id="cityInput" placeholder="Enter city">
+<button onclick="searchWeather()">Search</button>
+
+<div class="history">
+<h4>Search History</h4>
+<div id="history"></div>
+</div>
+
+</div>
+
+<!-- WEATHER INFO -->
+
+<div class="card">
+
+<h3>Weather Info</h3>
+
+<table>
+
+<tr>
+<td>City</td>
+<td id="city">-</td>
+</tr>
+
+<tr>
+<td>Temp</td>
+<td id="temp">-</td>
+</tr>
+
+<tr>
+<td>Weather</td>
+<td id="weather">-</td>
+</tr>
+
+<tr>
+<td>Humidity</td>
+<td id="humidity">-</td>
+</tr>
+
+<tr>
+<td>Wind</td>
+<td id="wind">-</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- CONSOLE -->
+
+<div class="card console">
+
+<h3>Console - Event Loop</h3>
+
+<br>
+
+<div class="console-box" id="console"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const API_KEY = "3c133f4e0817a4bfcf43332faeae5c89";
+
+function logConsole(text){
+
+const consoleBox = document.getElementById("console");
+
+const line = document.createElement("div");
+
+line.textContent = "▶ " + text;
+
+consoleBox.appendChild(line);
+
+consoleBox.scrollTop = consoleBox.scrollHeight;
+
+}
+
+function addHistory(city){
+
+const history = document.getElementById("history");
+
+const btn = document.createElement("button");
+
+btn.textContent = city;
+
+btn.onclick = () => {
+
+document.getElementById("cityInput").value = city;
+searchWeather();
+
+};
+
+history.appendChild(btn);
+
+}
+
+async function searchWeather(){
+
+const city = document.getElementById("cityInput").value;
+
+if(!city) return;
+
+logConsole("Sync Start");
+logConsole("Async Fetch Start");
+
+try{
+
+const response = await fetch(
+`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+);
+
+const data = await response.json();
+
+document.getElementById("city").innerText = data.name + ", " + data.sys.country;
+document.getElementById("temp").innerText = data.main.temp + " °C";
+document.getElementById("weather").innerText = data.weather[0].main;
+document.getElementById("humidity").innerText = data.main.humidity + "%";
+document.getElementById("wind").innerText = data.wind.speed + " m/s";
+
+addHistory(city);
+
+logConsole("Promise.then (Microtask)");
+setTimeout(()=>logConsole("setTimeout (Macrotask)"),0);
+
+logConsole("[ASYNC] Data received");
+
+}catch(e){
+
+logConsole("Error fetching data");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
